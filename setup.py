@@ -50,7 +50,7 @@ setup(
     python_requires='>=3.10',  # Optional
 
     # Any dependencies?
-    install_requires=[],  # Optional
+    install_requires=['attrs'],  # Optional
 
     # Need to install, for example, man-pages that your project has?
     package_data={
