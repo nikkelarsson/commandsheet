@@ -2,6 +2,7 @@
 
 from io import StringIO
 from contextlib import redirect_stderr
+from pathlib import Path
 from commandsheet.cli import CustomArgumentParser
 from commandsheet.errors import no_config_file_found
 from commandsheet.errors import no_config_file_sections_found
@@ -10,27 +11,44 @@ from commandsheet.errors import not_a_valid_config_file
 import pytest
 
 
-def test_no_config_file_found():
+def test_no_config_file_found(capsys):
     parser = CustomArgumentParser()
     with pytest.raises(SystemExit):
         no_config_file_found(parser)
 
+    out, err = capsys.readouterr()
+    assert err == 'No `commandsheet.ini` file found :(\n'
+    assert out == ''
 
-def test_no_config_file_sections_found():
+
+def test_no_config_file_sections_found(capsys):
     parser = CustomArgumentParser()
     with pytest.raises(SystemExit):
         no_config_file_sections_found(parser)
 
+    out, err = capsys.readouterr()
+    assert err == 'No sections to display from commandsheet.ini :(\n'
+    assert out == ''
 
-def test_no_config_file_path_exists():
+
+def test_no_config_file_path_exists(capsys):
     parser = CustomArgumentParser()
     file = '/invalid/path/to/file.ini'
     with pytest.raises(SystemExit):
         no_config_file_path_exists(parser, file=file)
 
+    out, err = capsys.readouterr()
+    assert err == f'Config file `{file}` does not exist\n'
+    assert out == ''
 
-def test_not_a_valid_config_file():
+
+def test_not_a_valid_config_file(capsys):
     parser = CustomArgumentParser()
     file = '/path/to/invalid/configfile.invalid'
     with pytest.raises(SystemExit):
         not_a_valid_config_file(parser, file=file)
+
+    out, err = capsys.readouterr()
+    name = Path(file).name
+    assert err == f'File `{name}` is not of valid config file format\n'
+    assert out == ''
