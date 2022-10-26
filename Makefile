@@ -33,6 +33,11 @@ dev:
 test:
 	coverage run
 
+.PHONY: report
+report:
+	coverage report
+	coverage html
+
 .PHONY: tox
 tox:
 	tox
