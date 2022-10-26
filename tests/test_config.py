@@ -1,13 +1,15 @@
+from configparser import ConfigParser
+from contextlib import contextmanager
+from pathlib import Path
+from os import chdir
+
 from commandsheet.config import config_file_path_exists
 from commandsheet.config import is_valid_config_file
 from commandsheet.config import config_empty
 from commandsheet.config import config_exists
 from commandsheet.config import parse_config
 from commandsheet.config import Section
-from configparser import ConfigParser
-from contextlib import contextmanager
-from pathlib import Path
-from os import chdir
+
 import pytest
 
 
