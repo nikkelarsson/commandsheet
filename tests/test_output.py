@@ -1,6 +1,21 @@
+from textwrap import dedent
+from commandsheet.output import header
 from commandsheet.output import format_section_heading
 from commandsheet.output import format_section_content
 import pytest
+
+
+def test_header(capsys):
+    """
+    ████████████████████████████████████████████████████████████████████████████
+    █─▄▄▄─█─▄▄─█▄─▀█▀─▄█▄─▀█▀─▄██▀▄─██▄─▀█▄─▄█▄─▄▄▀█─▄▄▄▄█─█─█▄─▄▄─█▄─▄▄─█─▄─▄─█
+    █─███▀█─██─██─█▄█─███─█▄█─███─▀─███─█▄▀─███─██─█▄▄▄▄─█─▄─██─▄█▀██─▄█▀███─███
+    ▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▄▀▄▀▄▄▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀
+    """
+    header()
+    out, err = capsys.readouterr()
+    assert out == dedent(test_header.__doc__) + '\n'
+    assert err == ''
 
 
 def test_format_section_heading():
