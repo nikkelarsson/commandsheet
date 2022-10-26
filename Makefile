@@ -31,7 +31,7 @@ dev:
 
 .PHONY: test
 test:
-	$(PYTHON) -m $(TESTSUITE)
+	coverage run
 
 .PHONY: tox
 tox:
