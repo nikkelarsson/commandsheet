@@ -25,3 +25,8 @@ def not_a_valid_config_file(parser, file):
     filename = Path(path).expanduser().name
     msg = _('File `%(file)s` is not of valid config file format')
     parser.exit(status=1, message=msg % {'file': filename}, newline=True)
+
+
+def no_compatible_os(parser, os_name):
+    msg = _('`%(os)s` is not an OS that is supported :(')
+    parser.exit(status=1, message=msg % {'os': os_name}, newline=True)

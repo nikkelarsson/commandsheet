@@ -7,6 +7,7 @@ from commandsheet.errors import no_config_file_found
 from commandsheet.errors import no_config_file_sections_found
 from commandsheet.errors import no_config_file_path_exists
 from commandsheet.errors import not_a_valid_config_file
+from commandsheet.errors import no_compatible_os
 
 import pytest
 
@@ -51,4 +52,16 @@ def test_not_a_valid_config_file(capsys):
     out, err = capsys.readouterr()
     name = Path(file).name
     assert err == f'File `{name}` is not of valid config file format\n'
+    assert out == ''
+
+
+def test_no_compatible_os(capsys):
+    parser = CustomArgumentParser()
+    os = 'Windows'
+
+    with pytest.raises(SystemExit):
+        no_compatible_os(parser, os)
+
+    out, err = capsys.readouterr()
+    assert err == f'`{os}` is not an OS that is supported :(\n'
     assert out == ''
