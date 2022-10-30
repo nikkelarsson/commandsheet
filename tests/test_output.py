@@ -1,7 +1,11 @@
 from textwrap import dedent
+
+from commandsheet.config import Section
 from commandsheet.output import header
+from commandsheet.output import display_commandsheet
 from commandsheet.output import format_section_heading
 from commandsheet.output import format_section_content
+
 import pytest
 
 
@@ -76,3 +80,34 @@ def test_format_section_content_with_long_description():
     assert result == expected
 
 
+def test_display_commandsheet(capsys):
+    content = (('cmd', 'desc'),)
+    alpha = Section(name='alpha', contents=content)
+    bravo = Section(name='bravo', contents=content)
+
+    # This basically represents the commandsheet as if
+    # it would be read from a file and parsed. This way,
+    # we don't have to actually have a config-file that
+    # we have to read, but we can simulate one, instead.
+    sections = [alpha, bravo]
+
+    display_commandsheet(
+        sections,
+        fillchar='.',
+        section_numbers=False,
+        max_width=40,
+        indent=8
+    )
+
+    expected = (
+        '[alpha]\n'
+        'cmd..... desc\n'
+        '\n'
+        '[bravo]\n'
+        'cmd..... desc\n'
+        '\n'
+    )
+
+    out, err = capsys.readouterr()
+    assert out == expected
+    assert err == ''
