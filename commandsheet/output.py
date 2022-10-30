@@ -36,26 +36,31 @@ def format_section_heading(heading, index, surround='[]'):
 #    ugly and not readable, especially when more commands starts to pile up> :(
 #
 def format_section_content(cmd, desc, indent, fillchar, max_width):
-    desc_split = wrap(desc, width=max_width)
-    desc_indent = []
+    parts = wrap(desc, width=max_width)
+    indented = []
 
-    for idx, sentence in enumerate(desc_split):
-        # Don't indent the first line of the description,
-        # we're going to do that with the f-string later.
-        if idx == 0:
-            desc_indent.append(sentence)
+    # Construct the description
+    for index, sentence in enumerate(parts):
+        if index == 0:
+            indented.append(sentence)
         else:
-            desc_indent.append(' '*(indent + 1) + sentence)
+            indented.append(' ' + (' ' * indent) + sentence)
+    wrapped = '\n'.join(indented)
+    description = wrapped
 
-    desc_wrapped = '\n'.join(desc_indent)
-    return f'{cmd:{fillchar}<{indent}} {desc_wrapped}'
+    result = f'{cmd:{fillchar}<{indent}} {description}'
+    return result
 
 
-def display_commandsheet(commandsheet, *, fillchar, section_numbers):
-    max_width = 40
-    index_start = 1
-    indent = 50
-
+def display_commandsheet(
+    commandsheet,
+    *,
+    fillchar,
+    section_numbers,
+    max_width=40,
+    indent=50
+):
+    index_start=1
     for idx, section in enumerate(commandsheet, start=index_start):
         # Format section heading
         section_heading = format_section_heading(
