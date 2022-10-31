@@ -14,6 +14,9 @@ jobs:
           - macos-latest
         python:
           - '3.10'
+          - '3.9'
+          - '3.8'
+          - '3.7'
 
     steps:
       - uses: actions/checkout@v3

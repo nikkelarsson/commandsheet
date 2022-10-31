@@ -47,7 +47,7 @@ setup(
     # Which Python versions are supported?
     # e.g. 'pip install' will check this and refuse to install
     # the project if the version doesn't match.
-    python_requires='>=3.10',  # Optional
+    python_requires='>=3.7',  # Optional
 
     # Any dependencies?
     install_requires=['attrs'],  # Optional
