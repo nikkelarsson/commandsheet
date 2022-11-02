@@ -87,6 +87,7 @@ def test_display_commandsheet(capsys):
     # we have to read, but we can simulate one, instead.
     sections = [alpha, bravo]
 
+    # We're not using the ``section_numbers`` parameter here
     display_commandsheet(
         sections,
         fillchar='.',
@@ -96,12 +97,34 @@ def test_display_commandsheet(capsys):
     )
 
     expected = (
-        '[alpha]\n'
-        'cmd..... desc\n'
-        '\n'
-        '[bravo]\n'
-        'cmd..... desc\n'
-        '\n'
+        '╭─ alpha ───────╮\n'
+        '│ cmd..... desc │\n'
+        '╰───────────────╯\n'
+        '╭─ bravo ───────╮\n'
+        '│ cmd..... desc │\n'
+        '╰───────────────╯\n'
+    )
+
+    out, err = capsys.readouterr()
+    assert out == expected
+    assert err == ''
+
+    # We are using the ``section_numbers`` parameter here
+    display_commandsheet(
+        sections,
+        fillchar='.',
+        section_numbers=True,
+        max_width=40,
+        indent=8
+    )
+
+    expected = (
+        '╭─ 1. alpha ────╮\n'
+        '│ cmd..... desc │\n'
+        '╰───────────────╯\n'
+        '╭─ 2. bravo ────╮\n'
+        '│ cmd..... desc │\n'
+        '╰───────────────╯\n'
     )
 
     out, err = capsys.readouterr()

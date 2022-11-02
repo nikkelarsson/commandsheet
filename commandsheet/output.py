@@ -58,17 +58,17 @@ def display_commandsheet(
     max_width=40,
     indent=50
 ):
-    index_start=1
-    for idx, section in enumerate(commandsheet, start=index_start):
+    from rich import print as rich_print
+    from rich.panel import Panel
+
+    for idx, section in enumerate(commandsheet, start=1):
         # Format section heading
         section_heading = format_section_heading(
             section.name, index=idx if section_numbers else None,
         )
 
-        # Print section heading
-        print(section_heading)
-
-        # Print section contents
+        # Format section contents
+        section_contents = []
         for cmd, desc in section.contents:
             line = format_section_content(
                 cmd,
@@ -77,5 +77,14 @@ def display_commandsheet(
                 fillchar=fillchar,
                 max_width=max_width
             )
-            print(line)
-        print()
+            section_contents.append(line)
+
+        # Print section with nice border
+        content = '\n'.join(section_contents)
+        panel = Panel(
+            content,
+            title=section_heading,
+            title_align='left',
+            expand=False
+        )
+        rich_print(panel)
