@@ -24,7 +24,7 @@ def test_version_option():
     cmd = ('commandsheet', '--version',)
     result = subprocess.run(cmd, capture_output=True, text=True)
     assert result.returncode == SUCCESS
-    assert result.stdout.startswith('commandsheet')
+    assert result.stdout == 'commandsheet 0.1.0\n'
 
 
 @contextmanager

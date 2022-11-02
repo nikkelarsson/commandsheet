@@ -31,7 +31,12 @@ dev:
 
 .PHONY: test
 test:
-	$(PYTHON) -m $(TESTSUITE)
+	coverage run
+
+.PHONY: report
+report:
+	coverage report
+	coverage html
 
 .PHONY: tox
 tox:

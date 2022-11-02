@@ -12,7 +12,7 @@ setup(
     name='commandsheet',  # Required
 
     # Version?
-    version='0.1.0a1',  # Required
+    version='0.1.0',  # Required
 
     # What does your project do?
     description="Display catalog of commands user uses often.",  # Optional
@@ -47,10 +47,10 @@ setup(
     # Which Python versions are supported?
     # e.g. 'pip install' will check this and refuse to install
     # the project if the version doesn't match.
-    python_requires='>=3.10',  # Optional
+    python_requires='>=3.7',  # Optional
 
     # Any dependencies?
-    install_requires=[],  # Optional
+    install_requires=['attrs', 'rich'],  # Optional
 
     # Need to install, for example, man-pages that your project has?
     package_data={
