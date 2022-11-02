@@ -1,6 +1,6 @@
 # Commandsheet: display catalog of commands user uses often
 
-![image](commandsheet.png)
+![image](https://raw.githubusercontent.com/nikkelarsson/commandsheet/main/commandsheet.png)
 
 What does it do? Exactly what the title says! (Or maybe more like: display
 catalog of commands you never remember how to use).
