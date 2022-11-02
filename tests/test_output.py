@@ -25,12 +25,8 @@ def test_header(capsys):
 def test_format_section_heading():
     text = 'heading'
     index = 1
-    chars = '()'
-    assert format_section_heading(text, index=index) == '[1. heading]'
-    assert format_section_heading(text, index=None) == '[heading]'
-    assert format_section_heading(text, index=None, surround=chars) == '(heading)'
-    assert format_section_heading(text, index=None, surround='') == 'heading'
-    assert format_section_heading(text, index=None, surround=None) == 'heading'
+    assert format_section_heading(text, index=index) == '1. heading'
+    assert format_section_heading(text, index=None) == 'heading'
 
 
 def test_format_section_content_with_short_description():

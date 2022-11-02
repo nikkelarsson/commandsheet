@@ -14,12 +14,10 @@ def header():
     print(dedent(header.__doc__))
 
 
-def format_section_heading(heading, index, surround='[]'):
-    if not surround or not surround.strip():
-        return heading if index is None else f'{index}. {heading}'
+def format_section_heading(heading, index):
     if index is not None:
-        return surround[0] + f'{index}. {heading}' + surround[1]
-    return surround[0] + heading + surround[1]
+        return f'{index}. {heading}'
+    return heading
 
 
 # Tries to achieve the following:
