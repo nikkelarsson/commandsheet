@@ -96,3 +96,9 @@ def test_options():
 def test_argparser():
     parser = argparser()
     assert isinstance(parser, CustomArgumentParser)
+    assert parser.prog == 'commandsheet'
+    assert parser.description == 'Display catalog of commands user uses often.'
+    assert parser.epilog is None
+    assert parser.usage is None
+    assert parser.add_help == False
+    assert parser.allow_abbrev == False
