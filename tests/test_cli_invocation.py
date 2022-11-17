@@ -67,7 +67,7 @@ def test_config_file_option():
     assert not result.returncode == SUCCESS
 
 
-def test_fillchar_option_too_many_fillchars(capsys):
+def test_fillchar_option_too_many_fillchars():
     """Test the case where the ``--fillchar``
     option was supplied with more than one arg.
     """
