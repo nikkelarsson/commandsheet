@@ -83,7 +83,7 @@ def options(parser):
         '-V',
         '--version',
         action='version',
-        version='%(prog)s 0.1.0',
+        version='%(prog)s 0.2.0',
         help=_("Show version")
     )
 
