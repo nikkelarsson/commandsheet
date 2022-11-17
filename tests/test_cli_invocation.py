@@ -75,3 +75,31 @@ def test_fillchar_option_too_many_fillchars():
     result = subprocess.run(cmd, capture_output=True, text=True)
     assert result.returncode != SUCCESS
     assert result.stderr == 'Options -f and --fillchar only accept one argument\n'
+
+
+def test_produce_sample_config():
+    cmd = ('commandsheet', '--sample-config')
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    expected = (
+        '[ffmpeg]\n'
+        'ffmpeg -i input.mp4 output.avi = convert input.mp4 to output.avi\n'
+        '\n'
+        '[zipfiles]\n'
+        'unzip filename.zip -d <dir> = unzip filename.zip to <dir>\n'
+        'zip archive.zip file1 file2 = zip files to archive.zip\n'
+        'zip -r archive.zip dir1 dir2 = zip dirs into archive.zip\n'
+        'zip -r archive.zip dir1 dir2 file1 file2 = zip dirs & files into archive.zip\n'
+        '\n'
+        '[filesystem]\n'
+        'ls -l = list in long format\n'
+        'cp -v = copy and show what is happening\n'
+        '\n'
+        '[networking]\n'
+        'ip a = show interface configuration\n'
+        'ping <address> = ping address <address>\n'
+    )
+
+    assert result.returncode == SUCCESS
+    assert result.stdout == expected
+    assert result.stderr == ''

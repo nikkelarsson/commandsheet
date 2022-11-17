@@ -9,6 +9,7 @@ from commandsheet.config import parse_config
 from commandsheet.config import config_exists
 from commandsheet.config import is_valid_config_file
 from commandsheet.config import config_file_path_exists
+from commandsheet.config import produce_sample_config
 from commandsheet.compatibility import compatible_os
 from commandsheet.errors import not_a_valid_config_file
 from commandsheet.errors import no_config_file_found
@@ -28,6 +29,10 @@ def main():
     operating_system = platform.system()
     if not compatible_os(operating_system):
         no_compatible_os(parser, operating_system)
+
+    sample_config = args.sample_config
+    if sample_config:
+        produce_sample_config(parser)
 
     fillchar = args.fillchar
     if len(fillchar) > 1:

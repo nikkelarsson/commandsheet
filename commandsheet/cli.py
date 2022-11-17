@@ -43,6 +43,11 @@ class CustomArgumentParser(argparse.ArgumentParser):
 def options(parser):
     opts = parser.add_argument_group(_('options'))
     opts.add_argument(
+        '--sample-config',
+        action='store_true',
+        help=_("Produce a sample `commandsheet.ini` file")
+    )
+    opts.add_argument(
         '-s',
         '--section-numbers',
         action='store_true',
