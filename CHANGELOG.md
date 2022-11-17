@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2022-11-17)
+
+### Changes
+- Add a `--sample-config` option to easily produce a basic config file
+
+### Bugfixes
+- Exit and print error message when `--fillchar` or `-f` is supplied with more than one argument
+
 ## 0.1.0 (2022-11-02)
 
 ### Changes

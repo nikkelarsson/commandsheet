@@ -8,6 +8,7 @@ from commandsheet.errors import no_config_file_sections_found
 from commandsheet.errors import no_config_file_path_exists
 from commandsheet.errors import not_a_valid_config_file
 from commandsheet.errors import no_compatible_os
+from commandsheet.errors import too_many_fillchars
 
 import pytest
 
@@ -65,3 +66,14 @@ def test_no_compatible_os(capsys):
     out, err = capsys.readouterr()
     assert err == f'`{os}` is not an OS that is supported :(\n'
     assert out == ''
+
+
+def test_too_many_fillchars(capsys):
+    parser = CustomArgumentParser()
+
+    with pytest.raises(SystemExit):
+        too_many_fillchars(parser)
+
+    out, err = capsys.readouterr()
+    assert out == ''
+    assert err == 'Options -f and --fillchar only accept one argument\n'

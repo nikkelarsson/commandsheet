@@ -12,7 +12,7 @@ setup(
     name='commandsheet',  # Required
 
     # Version?
-    version='0.1.0',  # Required
+    version='0.2.0',  # Required
 
     # What does your project do?
     description="Display catalog of commands user uses often.",  # Optional

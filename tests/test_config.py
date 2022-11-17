@@ -3,12 +3,14 @@ from contextlib import contextmanager
 from pathlib import Path
 from os import chdir
 
+from commandsheet.cli import CustomArgumentParser
 from commandsheet.config import config_file_path_exists
 from commandsheet.config import is_valid_config_file
 from commandsheet.config import config_empty
 from commandsheet.config import config_exists
 from commandsheet.config import parse_config
 from commandsheet.config import Section
+from commandsheet.config import produce_sample_config
 
 import pytest
 
@@ -64,3 +66,33 @@ def test_parse_config():
         assert not_empty_commandsheet != []
         empty_commandsheet = parse_config('')
         assert empty_commandsheet == []
+
+
+def test_sample_config(capsys):
+    parser = CustomArgumentParser()
+
+    with pytest.raises(SystemExit):
+        produce_sample_config(parser)
+
+    expected = (
+        '[ffmpeg]\n'
+        'ffmpeg -i input.mp4 output.avi = convert input.mp4 to output.avi\n'
+        '\n'
+        '[zipfiles]\n'
+        'unzip filename.zip -d <dir> = unzip filename.zip to <dir>\n'
+        'zip archive.zip file1 file2 = zip files to archive.zip\n'
+        'zip -r archive.zip dir1 dir2 = zip dirs into archive.zip\n'
+        'zip -r archive.zip dir1 dir2 file1 file2 = zip dirs & files into archive.zip\n'
+        '\n'
+        '[filesystem]\n'
+        'ls -l = list in long format\n'
+        'cp -v = copy and show what is happening\n'
+        '\n'
+        '[networking]\n'
+        'ip a = show interface configuration\n'
+        'ping <address> = ping address <address>\n'
+    )
+
+    out, err = capsys.readouterr()
+    assert out == expected
+    assert err == ''

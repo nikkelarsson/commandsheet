@@ -7,6 +7,30 @@ from configparser import ConfigParser
 
 CONFIG_FILE_FORMATS = {'.ini'}
 
+SAMPLE_CONFIG = (
+    '[ffmpeg]\n'
+    'ffmpeg -i input.mp4 output.avi = convert input.mp4 to output.avi\n'
+    '\n'
+    '[zipfiles]\n'
+    'unzip filename.zip -d <dir> = unzip filename.zip to <dir>\n'
+    'zip archive.zip file1 file2 = zip files to archive.zip\n'
+    'zip -r archive.zip dir1 dir2 = zip dirs into archive.zip\n'
+    'zip -r archive.zip dir1 dir2 file1 file2 = zip dirs & files into archive.zip\n'
+    '\n'
+    '[filesystem]\n'
+    'ls -l = list in long format\n'
+    'cp -v = copy and show what is happening\n'
+    '\n'
+    '[networking]\n'
+    'ip a = show interface configuration\n'
+    'ping <address> = ping address <address>'
+)
+
+
+def produce_sample_config(parser):
+    print(SAMPLE_CONFIG)
+    parser.exit(status=0)
+
 
 @define
 class Section:
