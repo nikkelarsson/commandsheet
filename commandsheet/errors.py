@@ -30,3 +30,8 @@ def not_a_valid_config_file(parser, file):
 def no_compatible_os(parser, os_name):
     msg = _('`%(os)s` is not an OS that is supported :(')
     parser.exit(status=1, message=msg % {'os': os_name}, newline=True)
+
+
+def too_many_fillchars(parser):
+    msg = _('Options -f and --fillchar only accept one argument')
+    parser.exit(status=1, message=msg, newline=True)

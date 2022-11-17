@@ -15,6 +15,7 @@ from commandsheet.errors import no_config_file_found
 from commandsheet.errors import no_config_file_sections_found
 from commandsheet.errors import no_config_file_path_exists
 from commandsheet.errors import no_compatible_os
+from commandsheet.errors import too_many_fillchars
 from commandsheet.output import header
 from commandsheet.output import display_commandsheet
 
@@ -29,6 +30,9 @@ def main():
         no_compatible_os(parser, operating_system)
 
     fillchar = args.fillchar
+    if len(fillchar) > 1:
+        too_many_fillchars(parser)
+
     section_numbers = args.section_numbers
     config_file = args.config_file if args.config_file else XDG_CONFIG_PATH
 

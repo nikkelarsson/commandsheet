@@ -65,3 +65,13 @@ def test_config_file_option():
     cmd = ('commandsheet', '--config-file', 'setup.py')
     result = subprocess.run(cmd, capture_output=True, text=True)
     assert not result.returncode == SUCCESS
+
+
+def test_fillchar_option_too_many_fillchars(capsys):
+    """Test the case where the ``--fillchar``
+    option was supplied with more than one arg.
+    """
+    cmd = ('commandsheet', '--fillchar=+-')
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    assert result.returncode != SUCCESS
+    assert result.stderr == 'Options -f and --fillchar only accept one argument\n'
